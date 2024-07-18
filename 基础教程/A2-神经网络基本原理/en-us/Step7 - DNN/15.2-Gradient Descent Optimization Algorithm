@@ -7,7 +7,7 @@
 
 先回忆一下随机梯度下降的基本算法，便于和后面的各种算法比较。图15-5中的梯度搜索轨迹为示意图。
 
-<img src="https://aiedugithub4a2.blob.core.windows.net/a2-images/Images/15/sgd_algorithm.png" />
+![](https://aiedugithub4a2.blob.core.windows.net/a2-images/Images/15/sgd_algorithm.png)
 
 图15-5 随机梯度下降算法的梯度搜索轨迹示意图
 
@@ -44,7 +44,7 @@ SGD方法的一个缺点是其更新方向完全依赖于当前batch计算出的
 
 Momentum算法借用了物理中的动量概念，它模拟的是物体运动时的惯性，即更新的时候在一定程度上保留之前更新的方向，同时利用当前batch的梯度微调最终的更新方向。这样一来，可以在一定程度上增加稳定性，从而学习地更快，并且还有一定摆脱局部最优的能力。Momentum算法会观察历史梯度，若当前梯度的方向与历史梯度一致（表明当前样本不太可能为异常点），则会增强这个方向的梯度。若当前梯度与历史梯度方向不一致，则梯度会衰减。
 
-<img src="https://aiedugithub4a2.blob.core.windows.net/a2-images/Images/15/momentum_algorithm.png" />
+![](https://aiedugithub4a2.blob.core.windows.net/a2-images/Images/15/momentum_algorithm.png)
 
 图15-6 动量算法的前进方向
 
@@ -161,7 +161,7 @@ Nesterov Accelerated Gradient，或者叫做Nesterov Momentum。
 
 图15-7是NAG的前进方向。
 
-<img src="https://aiedugithub4a2.blob.core.windows.net/a2-images/Images/15/nag_algorithm.png" ch="500" />
+![](https://aiedugithub4a2.blob.core.windows.net/a2-images/Images/15/nag_algorithm.png)
 
 图15-7 梯度加速算法的前进方向
 

@@ -87,7 +87,7 @@ Lorem ipsum[^1] dolor sit amet, consectetur adipiscing elit.[^2]
 # 图片
 
 <figure>
-  <img src="https://dummyimage.com/600x400/eee/aaa" width="300" />
+  ![](https://dummyimage.com/600x400/eee/aaa)
   <figcaption>Image caption</figcaption>
 </figure>
 

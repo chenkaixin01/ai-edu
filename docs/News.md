@@ -16,7 +16,7 @@ A7-强化学习，准备中。
 
 新书出版！
 
-<img src="./img/cover.png" width=300/>
+![](./img/cover.png)
 
 ![](./img/cover.png){ width=300 }
 

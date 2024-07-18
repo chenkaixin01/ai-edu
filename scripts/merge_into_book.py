@@ -29,7 +29,7 @@ def merge_markdown_files(folder_path, file_name,output_folder="output"):
   walk_result.sort(key=lambda x: x[0])
   
   # Define the regular expression pattern to match <img> tags
-  image_tag_pattern = r'<img src="(.*?)"/>'
+  image_tag_pattern = r'![]((.*?))'
   # Define the replacement pattern for Markdown image syntax
   replacement = r'![](\1)'
   # Open a new markdown file in write mode using the with syntax
