@@ -172,13 +172,13 @@ PS：数据集越大，训练时间越长，如果没有GPU资源，可以适当
 
 我们的目的是要通过自然语言的查询语句来搜索对应的代码，但是自然语言和程序代码是异构的两种数据，直观上找不到任何相似性，无法进行有效的搜索。如果我们可以将这两种异构的数据嵌入(映射)到同一个向量空间,如下图所示(修改自DCS论文):
 
-<img src='./img/vectorspace.png' />
+![](./img/vectorspace.png)
 
 这样带有相同或相似语义的自然语言查询语句和对应的代码就会离的很近，而不相关的自然语言查询语句和代码则会离得很远。我们只要在该空间内找到距离最近的代码就可以了。
 
 所以Code Search的整体系统架构可以由下图(修改自DCS论文)来表示：
 
-<img src='./img/dcssystem.png' width='400' />
+![](./img/dcssystem.png)
 
 圆圈代表事先训练好的模型，这个模型可以把程序代码和自然语言嵌入到同一个向量空间。虚线框内是线下的处理过程，事先将所有的代码片段输入到模型中，分别算出它们的向量，并记录下来。当在线查询时，将自然语言的查询语句输入到模型中，模型可以返回对应的查询语句向量，然后与事先计算好的大量代码向量进行比较，找出相似度最高的几个向量，将这几个向量对应的原始代码片段做为查询的结果返回即可。
 
@@ -188,7 +188,7 @@ PS：数据集越大，训练时间越长，如果没有GPU资源，可以适当
 
 `Deep Code Search`论文中提出的模型叫做`CODEnn(Code-Description Embedding Neural Network)`，可以由下图(修改自DCS论文)来表示：
 
-<img src='./img/model1.png' width='400' />
+![](./img/model1.png)
 
 该模型分为三个部分：
 * 代码嵌入网络(CoNN)，这个网络可以将代码转换为向量表示。代码不仅是单纯的文本，里面还包括了API、控制流等其它信息。在CoNN中我们抽取了代码的方法名、API序列、标识符来计算代码对应的向量。
@@ -197,7 +197,7 @@ PS：数据集越大，训练时间越长，如果没有GPU资源，可以适当
 
 具体模型的细节可以参考下图(修改自DCS论文)：
 
-<img src='./img/model2.png' />
+![](./img/model2.png)
 
 其中方法名、API序列、描述，都是以序列的形式存在的，我们使用循环神经网络(RNN)对其作处理。对于标识符，我们抽取的是代码片段中的单词，并做去重处理，不关心其顺序关系，所以只使用MLP即可。
 
@@ -209,7 +209,7 @@ PS：数据集越大，训练时间越长，如果没有GPU资源，可以适当
 
 下图是各个调参后训练的结果，这里有两条蓝线，起初在下方后来在上方的是单向RNN，另一条是双向RNN。improved曲线是指使用了均值池化、GRU和ReLU激活函数的训练，横坐标是epoch。
 
-<img src='./img/compare.png' />
+![](./img/compare.png)
 
 从上图可以看出，使用均值池化、GRU、ReLU激活函数都能对模型有所帮助，而单向/双向的影响比较小。所在在这个案例中，我们将使用均值池化、双向GRU、ReLU激活函数来训练CODEnn。
 
@@ -371,7 +371,7 @@ python src/3Model/codenn.py --dataset_path data/py/final --model_path data/py/mo
 
 模型的训练过程中，可以在控制台或命令行窗口看到类似如下的输出结果
 
-<img src='./img/train.png' />
+![](./img/train.png)
 
 另外，训练过程中使用了`tensorboardX`库记录一些关键信息，可以借助`tensorboard`可视化这些信息，来直观的分析训练数据。运行以下命令
 
@@ -383,11 +383,11 @@ python -m tensorboard.main --logdir runs
 
 其中，loss的变化如下图所示：
 
-<img src='./img/trainloss.png' />
+![](./img/trainloss.png)
 
 另外，DCS论文中还定义了4种评价指标Precision@K、MAP、MRR和NDCG来评估模型。关于这几种指标，感兴趣的同学可以详细阅读下论文，或者参看这个Slides：[Information Retrieval - web.stanford.edu](https://web.stanford.edu/class/cs276/handouts/EvaluationNew-handout-6-per.pdf)。这些指标都是越高越好。
 
-<img src='./img/eval.png' />
+![](./img/eval.png)
 
 模型训练完成后可以在`--model_path`目录下找到扩展名为`pth`的文件，我们的模型就保存在其中。
 
@@ -398,7 +398,7 @@ python -m tensorboard.main --logdir runs
 
 回顾一下前面提到的代码搜索的整体系统架构图(修改自DCS论文)：
 
-<img src='./img/dcssystem.png' width='400' />
+![](./img/dcssystem.png)
 
 ### 7.1 计算所有代码片段的向量
 
@@ -435,7 +435,7 @@ python src/3Model/codenn.py --dataset_path data/py/final --model_path data/py/mo
 
 最终的执行效果如下图所示：
 
-<img src='./img/search.png' />
+![](./img/search.png)
 
 ### 7.3 提供web服务
 
